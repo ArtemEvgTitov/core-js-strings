@@ -20,7 +20,11 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
+  try {
     return value.length;
+  } catch (err) {
+    return 0;
+  }
 }
 
 /**
@@ -38,7 +42,7 @@ function getStringLength(value) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-    return typeof value === 'string' || value instanceof String;
+  return typeof value === 'string' || value instanceof String;
 }
 
 /**
@@ -54,7 +58,8 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-    return value1 + value2;
+  const str = '';
+  return str.concat(value1, value2);
 }
 
 /**
@@ -69,7 +74,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-    return value.charAt(0);
+  return value.charAt(0);
 }
 
 /**
@@ -84,7 +89,7 @@ function getFirstChar(value) {
  *   removeLeadingAndTrailingWhitespaces('\t\t\tHello, World! ') => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    return value.trim();
+  return value.trim();
 }
 
 /**
@@ -99,7 +104,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   removeLeadingWhitespaces('\t\t\tHello, World! ') => 'Hello, World! '
  */
 function removeLeadingWhitespaces(value) {
-    return value.trimLeft();
+  return value.trimStart();
 }
 
 /**
@@ -114,7 +119,7 @@ function removeLeadingWhitespaces(value) {
  *   removeTrailingWhitespaces('\t\t\tHello, World! ') => '\t\t\tHello, World!'
  */
 function removeTrailingWhitespaces(value) {
-    return value.trimRight();
+  return value.trimEnd();
 }
 
 /**
@@ -131,7 +136,11 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
+  try {
     return str.repeat(times);
+  } catch (e) {
+    return '';
+  }
 }
 
 /**
@@ -147,7 +156,7 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-    str.replace(value, '');
+  return str.replace(value, '');
 }
 
 /**
@@ -163,13 +172,12 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeLastOccurrences(str, value) {
-    const lastIndex = str.lastIndexOf(value);
-    if (lastIndex !== -1) {
-        return str.slice(0, lastIndex) + str.slice(lastIndex + value.length);
-    }
-    return str;
+  const lastIndex = str.lastIndexOf(value);
+  if (lastIndex !== -1) {
+    return str.slice(0, lastIndex) + str.slice(lastIndex + value.length);
+  }
+  return str;
 }
-
 
 /**
  * Calculate the sum of character codes of the given string.
@@ -184,13 +192,17 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes() => 0
  */
 function sumOfCodes(str) {
-    let index = 0;
-    let result = 0;
+  let index = 0;
+  let result = 0;
+  try {
     while (index < str.length) {
-        result += str.charCodeAt(index);
-        index += 1;
+      result += str.charCodeAt(index);
+      index += 1;
     }
     return result;
+  } catch (e) {
+    return '';
+  }
 }
 
 /**
@@ -205,7 +217,7 @@ function sumOfCodes(str) {
  *   startsWith('Hello World', 'Hello') => true
  */
 function startsWith(str, substr) {
-    return str.startsWith(substr);
+  return str.startsWith(substr);
 }
 
 /**
@@ -220,7 +232,7 @@ function startsWith(str, substr) {
  *   endsWith('Hello World', 'Hello') => false
  */
 function endsWith(str, substr) {
-    return str.endWith(substr);
+  return str.endsWith(substr);
 }
 
 /**
@@ -237,10 +249,10 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-    const mm = String(minutes).padStart(2, '0');
-    const ss = String(seconds).padStart(2, '0');
+  const mm = String(minutes).padStart(2, '0');
+  const ss = String(seconds).padStart(2, '0');
 
-    return `${mm}:${ss}`;
+  return `${mm}:${ss}`;
 }
 
 /**
@@ -254,7 +266,7 @@ function formatTime(minutes, seconds) {
  *   reverseString('12345') => '54321'
  */
 function reverseString(str) {
-    return str.split('').reverse().join('');
+  return str.split('').reverse().join('');
 }
 
 /**
@@ -269,7 +281,7 @@ function reverseString(str) {
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
 function orderAlphabetically(str) {
-    return str.split('').sort().join('');
+  return str.split('').sort().join('');
 }
 
 /**
@@ -285,7 +297,7 @@ function orderAlphabetically(str) {
  *   containsSubstring('12345', '34') => true
  */
 function containsSubstring(str, substring) {
-    return str.indexOf(substring) !== -1;
+  return str.indexOf(substring) !== -1;
 }
 
 /**
@@ -303,9 +315,9 @@ function containsSubstring(str, substring) {
  *   countVowels('XYZ') => 1
  */
 function countVowels(str) {
-    const vowels = /[aeiouyAEIOUY]/g;
-    const matches = str.match(vowels);
-    return matches ? matches.length : 0;
+  const vowels = /[aeiouyAEIOUY]/g;
+  const matches = str.match(vowels);
+  return matches ? matches.length : 0;
 }
 
 /**
@@ -322,12 +334,9 @@ function countVowels(str) {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
-    let strReverse = str.split('').reverse().join('');
-    if (strReverse == str) {
-        return true;
-    } else {
-        return false;
-    }
+  const cleanedStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  const strReverse = cleanedStr.split('').reverse().join('');
+  return strReverse === cleanedStr;
 }
 
 /**
@@ -343,16 +352,14 @@ function isPalindrome(str) {
  *   findLongestWord('No words here') => 'words'
  */
 function findLongestWord(sentence) {
-    const words = sentence.split(' ');
-    let longestWord = '';
-
-    for (const word of words) {
-        if (word.length > longestWord.length) {
-            longestWord = word;
-        }
+  const words = sentence.split(' ');
+  let longestWord = '';
+  for (let i = 0; i < words.length; i += 1) {
+    if (words[i].length > longestWord.length) {
+      longestWord = words[i];
     }
-
-    return longestWord;
+  }
+  return longestWord;
 }
 
 /**
@@ -366,9 +373,10 @@ function findLongestWord(sentence) {
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
 function reverseWords(str) {
-    return str.split(' ').map(word =>
-        word.split('').reverse().join('')
-    ).join(' ');
+  return str
+    .split(' ')
+    .map((word) => word.split('').reverse().join(''))
+    .join(' ');
 }
 
 /**
@@ -383,11 +391,12 @@ function reverseWords(str) {
  *   invertCase('12345') => '12345'
  */
 function invertCase(str) {
-    return str.split('').map(char =>
-        char === char.toLowerCase() ?
-        char.toUpperCase() :
-        char.toLowerCase()
-    ).join('');
+  return str
+    .split('')
+    .map((char) =>
+      char === char.toLowerCase() ? char.toUpperCase() : char.toLowerCase()
+    )
+    .join('');
 }
 
 /**
@@ -404,8 +413,8 @@ function invertCase(str) {
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    let hello = "Hello, ";
-    return hello.concat(firstName, " ", lastName, "!");
+  const hello = 'Hello, ';
+  return hello.concat(firstName, ' ', lastName, '!');
 }
 
 /**
@@ -418,8 +427,9 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate( /* value */ ) {
-    throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const match = value.match(/^Hello, (.+)!$/);
+  return match ? match[1] : '';
 }
 
 /**
@@ -433,8 +443,8 @@ function extractNameFromTemplate( /* value */ ) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag( /* str */ ) {
-    throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.slice(1, -1);
 }
 
 /**
@@ -452,8 +462,8 @@ function unbracketTag( /* str */ ) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails( /* str */ ) {
-    throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -472,8 +482,20 @@ function extractEmails( /* str */ ) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13( /* str */ ) {
-    throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+  const r = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'.split('');
+  const strArray = str.split('');
+  let result = '';
+  for (let i = 0; i < strArray.length; i += 1) {
+    const index = a.indexOf(strArray[i]);
+    if (index >= 0) {
+      result += r[index];
+    } else {
+      result += strArray[i];
+    }
+  }
+  return result;
 }
 
 /**
@@ -500,37 +522,91 @@ function encodeToRot13( /* str */ ) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId( /* value */ ) {
-    throw new Error('Not implemented');
+function getCardId(value) {
+  const cards = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  return cards.indexOf(value);
 }
 
 module.exports = {
-    getStringLength,
-    isString,
-    concatenateStrings,
-    getFirstChar,
-    removeLeadingAndTrailingWhitespaces,
-    removeLeadingWhitespaces,
-    removeTrailingWhitespaces,
-    repeatString,
-    removeFirstOccurrences,
-    removeLastOccurrences,
-    sumOfCodes,
-    endsWith,
-    startsWith,
-    formatTime,
-    reverseString,
-    countVowels,
-    orderAlphabetically,
-    containsSubstring,
-    isPalindrome,
-    findLongestWord,
-    reverseWords,
-    invertCase,
-    getStringFromTemplate,
-    extractNameFromTemplate,
-    extractEmails,
-    unbracketTag,
-    encodeToRot13,
-    getCardId,
+  getStringLength,
+  isString,
+  concatenateStrings,
+  getFirstChar,
+  removeLeadingAndTrailingWhitespaces,
+  removeLeadingWhitespaces,
+  removeTrailingWhitespaces,
+  repeatString,
+  removeFirstOccurrences,
+  removeLastOccurrences,
+  sumOfCodes,
+  endsWith,
+  startsWith,
+  formatTime,
+  reverseString,
+  countVowels,
+  orderAlphabetically,
+  containsSubstring,
+  isPalindrome,
+  findLongestWord,
+  reverseWords,
+  invertCase,
+  getStringFromTemplate,
+  extractNameFromTemplate,
+  extractEmails,
+  unbracketTag,
+  encodeToRot13,
+  getCardId,
 };
